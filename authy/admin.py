@@ -1,3 +1,5 @@
 from django.contrib import admin
+from authy.models import Profile, PeopleList
 
-# Register your models here.
+admin.site.register(Profile)
+admin.site.register(PeopleList)
