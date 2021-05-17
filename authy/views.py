@@ -133,8 +133,6 @@ def UserProfile(request, username):
 
 	return HttpResponse(template.render(context, request))
 
-
-
 @login_required
 def PasswordChange(request):
 	user = request.user
@@ -157,7 +155,6 @@ def PasswordChange(request):
 
 def PasswordChangeDone(request):
 	return render(request, 'change_password_done.html')
-
 
 @login_required
 def edit_profile(request):
