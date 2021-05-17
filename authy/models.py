@@ -54,10 +54,5 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
 	instance.profile.save()
 
-class PeopleList(models.Model):
-	title = models.CharField(max_length=150)
-	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='list_user')
-	people = models.ManyToManyField(User, related_name='people_user')
-
 post_save.connect(create_user_profile, sender=User)
 post_save.connect(save_user_profile, sender=User)
