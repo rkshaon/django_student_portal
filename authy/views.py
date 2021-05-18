@@ -32,129 +32,27 @@ def sign_up(request):
 
 	return render(request, 'registration/signup.html', context)
 
-def SideNavInfo(request):
+def side_nav_info(request):
 	user = request.user
 	nav_profile = None
-	fans = None
-	follows = None
 
 	if user.is_authenticated:
 		nav_profile = Profile.objects.get(user=user)
-		fans = Subscription.objects.filter(subscribed=user).count()
-		follows = Subscription.objects.filter(subscriber=user).count()
 
-	return {'nav_profile': nav_profile, 'fans': fans, 'follows': follows}
+	return {'nav_profile': nav_profile}
 
 
-def UserProfile(request, username):
+def user_profile(request, username):
 	user = get_object_or_404(User, username=username)
 	profile = Profile.objects.get(user=user)
-	url = request.resolver_match.url_name
-
-	tiers = None
-	no_a_subscriber = None
-	posts = None
-	page_type = None
-	posts_data = None
-
-	if request.user != user:
-		try:
-			#Check if the user is subscribed to the profile
-			subscriber_tier = Subscription.objects.get(subscriber=request.user, subscribed=user, expired=False)
-			#Then we get the tiers of the profile and exclude the tiers that we are currently subscribed
-			tiers = Tier.objects.filter(user=user).exclude(number=subscriber_tier.tier.number)
-			if url == 'profilephotos':
-				posts = PostFileContent.objects.filter(user=user, tier__number__lte=subscriber_tier.tier.number).order_by('-posted').exclude(file__endswith='mp4')
-				page_type = 1
-			elif url == 'profilevideos':
-				posts = PostFileContent.objects.filter(user=user, tier__number__lte=subscriber_tier.tier.number).order_by('-posted').exclude(file__endswith='jpg')
-				page_type = 2
-			else:
-				posts = Post.objects.filter(user=user, tier__number__lte=subscriber_tier.tier.number).order_by('-posted')
-				page_type = 3
-		except Exception:
-			tiers = Tier.objects.filter(user=user)
-			no_a_subscriber = False
-	else:
-		if url == 'profilephotos':
-			posts = PostFileContent.objects.filter(user=user).order_by('-posted').exclude(file__endswith='mp4')
-			page_type = 1
-		elif url == 'profilevideos':
-			posts = PostFileContent.objects.filter(user=user).order_by('-posted').exclude(file__endswith='jpg')
-			page_type = 2
-		else:
-			posts = Post.objects.filter(user=user).order_by('-posted')
-			page_type = 3
-
-	#Pagination
-	if posts:
-		paginator = Paginator(posts, 6)
-		page_number = request.GET.get('page')
-		posts_data = paginator.get_page(page_number)
-
-	#Profile stats
-	income = Subscription.objects.filter(subscribed=user, expired=False).aggregate(Sum('tier__price'))
-	fans_count = Subscription.objects.filter(subscribed=user, expired=False).count()
-	posts_count = Post.objects.filter(user=user).count()
-
-
-	#Favorite people lists select
-	favorite_list = PeopleList.objects.filter(user=request.user)
-
-	#Check if the profile is in any of favorite list
-	person_in_list = PeopleList.objects.filter(user=request.user, people=user).exists()
-
-	#New Favorite List form
-	if request.method == 'POST':
-		form = NewListForm(request.POST)
-		if form.is_valid():
-			title = form.cleaned_data.get('title')
-			PeopleList.objects.create(title=title, user=request.user)
-			return HttpResponseRedirect(reverse('profile', args=[username]))
-	else:
-		form = NewListForm()
 
 	template = loader.get_template('profile.html')
 
 	context = {
 		'profile':profile,
-		'tiers': tiers,
-		'form': form,
-		'favorite_list': favorite_list,
-		'person_in_list': person_in_list,
-		'posts': posts_data,
-		'page_type': page_type,
-		'income': income,
-		'fans_count': fans_count,
-		'posts_count': posts_count,
-		'no_a_subscriber': no_a_subscriber,
-
 	}
 
 	return HttpResponse(template.render(context, request))
-
-@login_required
-def PasswordChange(request):
-	user = request.user
-	if request.method == 'POST':
-		form = ChangePasswordForm(request.POST)
-		if form.is_valid():
-			new_password = form.cleaned_data.get('new_password')
-			user.set_password(new_password)
-			user.save()
-			update_session_auth_hash(request, user)
-			return redirect('change_password_done')
-	else:
-		form = ChangePasswordForm(instance=user)
-
-	context = {
-		'form':form,
-	}
-
-	return render(request, 'registration/change_password.html', context)
-
-def PasswordChangeDone(request):
-	return render(request, 'change_password_done.html')
 
 @login_required
 def edit_profile(request):
@@ -183,3 +81,26 @@ def edit_profile(request):
 	}
 
 	return render(request, 'registration/edit_profile.html', context)
+
+@login_required
+def PasswordChange(request):
+	user = request.user
+	if request.method == 'POST':
+		form = ChangePasswordForm(request.POST)
+		if form.is_valid():
+			new_password = form.cleaned_data.get('new_password')
+			user.set_password(new_password)
+			user.save()
+			update_session_auth_hash(request, user)
+			return redirect('change_password_done')
+	else:
+		form = ChangePasswordForm(instance=user)
+
+	context = {
+		'form':form,
+	}
+
+	return render(request, 'registration/change_password.html', context)
+
+def PasswordChangeDone(request):
+	return render(request, 'change_password_done.html')

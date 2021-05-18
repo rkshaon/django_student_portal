@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from authy.views import user_profile
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('authy.urls')),
+    path('<username>/', user_profile, name='profile'),
 ]
