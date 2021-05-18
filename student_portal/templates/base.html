@@ -42,32 +42,28 @@
       {% endif %}
       </a>
       <a href="#name"><span class="white-text name">{{ nav_profile.user.first_name }} {{ nav_profile.user.last_name }}</span></a>
-      <a href="#email"><span class="white-text email">{{ nav_profile.user.email }}</span></a>
+      <a href="#name"><span class="blue-text name">Authenticted User Name</span></a>
+      <a href="#email"><span class="blue-text email">{{ nav_profile.user.email }}</span></a>
     </div></li>
-    <li><a href="#"><i class="material-icons">star</i>{{ fans }}     Fans</a></li>
-    <li><a href="#"><i class="material-icons">people</i>{{ follows }}     Following</a></li>
+    <li><a href="{% url 'profile' nav_profile.user.username %}"><i class="material-icons">person</i>My profile</a></li>
+    <li><a href="#"><i class="material-icons">bookmarks</i>Dashboard</a></li>
     <li><div class="divider"></div></li>
-    <li><a class="subheader">Me</a></li>
-    <li><a href="#"><i class="material-icons">person</i>My profile</a></li>
-    <li><a href="#"><i class="material-icons">bookmarks</i>Bookmarks</a></li>
-    <li><a href="#"><i class="material-icons">list</i>Lists</a></li>
+    <li><a class="subheader">Learning</a></li>
+    <li><a href="#"><i class="material-icons">menu_book</i>Courses</a></li>
+    <li><a href="#"><i class="material-icons">inbox</i>Inbox</a></li>
+    <li><a href="#"><i class="material-icons">circle_notifications</i>Notifications</a></li>
     <li><div class="divider"></div></li>
-    <li><a class="subheader">Payments</a></li>
-    <li><a href="#!"><i class="material-icons">credit_card</i>Your cards</a></li>
-    <li><a href="#!"><i class="material-icons">account_balance</i>Your Bank</a></li>
+    <li><a class="subheader">Teaching</a></li>
+    <li><a href="#"><i class="material-icons">menu_book</i>Your courses</a></li>
     <li><div class="divider"></div></li>
     <li><a href="{% url 'logout' %}"><i class="material-icons">power_off</i>Log out</a></li>
   </ul>
   <div class="container">
-    <div class="row">
-      {% block banner %}
-      {% endblock %}
+    <div class="section">
       {% block content %}
       {% endblock %}
     </div>
   </div>
-  {% block icons %}
-  {% endblock %}
   <footer class="page-footer orange">
     <div class="container">
       <div class="row">

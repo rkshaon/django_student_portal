@@ -22,6 +22,7 @@ from authy.views import user_profile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('user/', include('authy.urls')),
-    path('<username>/', user_profile, name='profile'),
+    path('<username>/', user_profile, name='profile'),    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
