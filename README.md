@@ -1,4 +1,4 @@
-# django_student_portal
+# Student Portal
 
-## used tools
+## Tools
 `django-ckeditor`
