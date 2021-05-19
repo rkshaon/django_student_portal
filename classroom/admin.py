@@ -1,5 +1,9 @@
 from django.contrib import admin
 from classroom.models import Category, Course
 
-admin.site.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    """docstring for CategoryAdmin."""
+    prepopulated_fields = {"slug": ("title",)}
+
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Course)

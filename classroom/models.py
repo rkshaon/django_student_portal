@@ -14,6 +14,7 @@ def user_directory_path(instance, filename):
 class Category(models.Model):
     """docstring for Category."""
     title = models.CharField(max_length=100, verbose_name='Title')
+    icon = models.CharField(max_length=100, verbose_name='Icon', default='article')
     slug = models.SlugField(unique=True)
 
     def get_absolute_url(self):
