@@ -14,13 +14,11 @@
 <body>
   <nav class="light-blue" role="navigation">
     <div class="nav-wrapper container">
-      <a href="#" class="brand-logo"><i class="material-icons">cloud</i>Portal</a>
+      <a href="{% url 'index' %}" class="brand-logo"><i class="material-icons">cloud</i>Student Portal</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#"><i class="material-icons left">home</i>Home</a></li>
-        <li><a href="#"><i class="material-icons left">notifications</i>Notifications<span class="new badge">{{ count_notifications }}</span></a></li>
-        <li><a href="#"><i class="material-icons left">add_box</i>Post</a></li>
-        <li><a href="#"><i class="material-icons left">add_box</i>New tier</a></li>
-        <li><a href="#"><i class="material-icons left">message</i>Messages</a></li>
+        <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons left">person</i>Profile</a></li>
+      </ul>
+      <ul class="sidenav" id="nav-mobile">
         <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons left">person</i>Profile</a></li>
       </ul>
     </div>
@@ -60,6 +58,9 @@
   </ul>
   <div class="container">
     <div class="section">
+      {% block banner %}
+      {% endblock %}
+
       {% block content %}
       {% endblock %}
     </div>
