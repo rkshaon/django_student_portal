@@ -52,7 +52,7 @@ def new_course(request):
             category = form.cleaned_data.get('category')
             syllabus = form.cleaned_data.get('syllabus')
 
-            Course.objects.create(picture=picture, title=title, description=description, category=category, syllabus=syllabus)
+            Course.objects.create(picture=picture, title=title, description=description, category=category, syllabus=syllabus, user=user)
             return redirect('my_courses')
     else:
         form = NewCourseForm()

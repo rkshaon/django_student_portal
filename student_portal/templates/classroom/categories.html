@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block banner %}
+  <div class="section no-pad-bot" id='index-banner'>
+    <div class="container">
+      <br><br>
+      <h2 class="header orange-text center">Learning</h2>
+      <h2 class="header col s12 light center">Earn your certicate, learn a new skill or degree here.</h2>
+    </div>
+    <br>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="section">
+    <h4>Category</h4>
+    <div class="divider"></div>
+  </div>
+  <div class="row">
+    {% for category in categories %}
+    <a href="{% url 'category_courses' category.slug %}">
+      <div class="col s12 m4">
+        <div class="card-panel teal center-align white-text">
+          <h5 class="white-text"><i class="material-icons">{{ category.icon }}</i> <b>{{ category.title }}</b></h5>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+{% endblock %}
