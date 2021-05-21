@@ -1,7 +1,7 @@
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 
-from classroom.models import Course
+from classroom.models import Course, Category
 
 class NewCourseForm(forms.ModelForm):
     """docstring for NewCourseForm."""

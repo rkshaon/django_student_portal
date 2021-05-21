@@ -19,10 +19,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from authy.views import user_profile
+from classroom.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('course/', include('classroom.urls')),
     path('user/', include('authy.urls')),
-    path('<username>/', user_profile, name='profile'),    
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('<username>/', user_profile, name='profile'),
+    path('', index, name='index'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
