@@ -6,6 +6,7 @@ import uuid
 from ckeditor.fields import RichTextField
 
 from django.contrib.auth.models import User
+from module.models import Module
 
 def user_directory_path(instance, filename):
     # This file will be uploaded to MEDIA/{user_id}/filename
@@ -33,6 +34,7 @@ class Course(models.Model):
     syllabus = RichTextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Course_Owner')
     enrolled = models.ManyToManyField(User, related_name='Enrolled_User')
+    modules = models.ManyToManyField(Module, related_name='Course_Modules')
 
     def __str__(self):
         return self.title
