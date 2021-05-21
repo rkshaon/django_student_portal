@@ -8,7 +8,8 @@ from classroom.form import NewCourseForm
 
 def index(request):
     user = request.user
-    
+    courses = Course.objects.filter(enrolled=user)
+
 
 def new_course(request):
     user = request.user
