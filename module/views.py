@@ -45,8 +45,8 @@ def course_modules(request, course_id):
         teacher_mode = True
 
     context = {
-        'form': form,
         'teacher_mode': teacher_mode,
+        'course': course,
     }
 
     template = loader.get_template('module/modules.html')

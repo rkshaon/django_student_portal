@@ -64,6 +64,22 @@ def new_course(request):
     template = loader.get_template('classroom/newcourse.html')
     return HttpResponse(template.render(context, request))
 
+def course_details(request, course_id):
+    user = request.user
+    course = get_object_or_404(Course, id=course_id)
+    teacher_mode = False
+
+    if user == course.user:
+        teacher_mode = True
+
+    context = {
+        'teacher_mode': teacher_mode,
+        'course': course,
+    }
+
+    template = loader.get_template('classroom/course.html')
+    return HttpResponse(template.render(context, request))
+
 @login_required
 def enroll(request, course_id):
     user = request.user
@@ -119,7 +135,7 @@ def my_courses(request):
     courses = Course.objects.filter(user=user)
 
     context = {
-        'course': courses,
+        'courses': courses,
     }
 
     template = loader.get_template('classroom/mycourses.html')

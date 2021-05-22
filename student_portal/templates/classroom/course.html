@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section">
+  <h4>{{ course.title }}</h4>
+  <div class="divider"></div>
+</div>
+<div class="row">
+  <div class="col s3">
+    <ul class="collection with-header">
+      <li class="collection header"><h4>Classroom</h4></li>
+      <a href="{% url 'course_details' course.id %}" class="collection-item active">Home</a>
+      <a href="{% url 'course_modules' course.id %}" class="collection-item">Module</a>
+      <a href="#" class="collection-item">Submissions</a>
+      <a href="#" class="collection-item">Questions</a>
+    </ul>
+  </div>
+  <div class="col s9">
+    {% if teacher_mode == True %}
+    <a href="#" class="btn-floating btn-large waves-effect waves-light red light"><i class="material-icons">add</i></a>
+    {% endif %}
+    <div class="section">
+      <h4>Recent announcements</h4>
+      <div class="divider"></div>      
+      {{ course.syllabus | safe}}
+    </div>
+  </div>
+</div>
+{% endblock %}
