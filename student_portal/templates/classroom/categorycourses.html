@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="row">
+    {% for course in courses %}
+    <!-- <a href="{% url 'course_details' course.id %}"> -->
+      <div class="col s12 m6">
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{ course.picture.url }}">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">{{ course.title }}Card Title<i class="material-icons right">more_vert</i></span>
+            <p class="activator grey-text text-darken-4"><b>{{ course.enrolled.count }}</b> students</p>
+            <p>
+              <a href="{% url 'course_details' course.id %}" class="waves-effect btn green white-text">View</a>
+              <a href="{% url 'enroll' course.id %}" class="waves-effect btn teal white-text">Enroll</a>
+            </p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">{{ course.title }}<i class="material-icons right">close</i></span>
+            <p>{{ course.syllabus | safe }}</p>
+          </div>
+        </div>
+      </div>
+    <!-- </a> -->
+    {% endfor %}
+  </div>
+{% endblock %}
