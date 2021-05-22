@@ -140,3 +140,14 @@ def my_courses(request):
 
     template = loader.get_template('classroom/mycourses.html')
     return HttpResponse(template.render(context, request))
+
+def enrolled_courses(request):
+    user = request.user
+    courses = Course.objects.filter(enrolled=user)
+
+    context = {
+        'courses': courses,
+    }
+
+    template = loader.get_template('classroom/enrolledcourses.html')
+    return HttpResponse(template.render(context, request))

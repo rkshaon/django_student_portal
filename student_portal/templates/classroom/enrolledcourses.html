@@ -15,8 +15,6 @@
             <p class="activator grey-text text-darken-4"><b>{{ course.enrolled.count }}</b> students</p>
             <p>
               <a href="{% url 'course_details' course.id %}" class="waves-effect btn green white-text">View</a>
-              <a href="{% url 'edit_course' course.id %}" class="waves-effect btn teal white-text">Edit</a>
-              <a href="{% url 'delete_course' course.id %}" class="btn waves-effect red white-text">Delete</a>
             </p>
           </div>
           <div class="card-reveal">
