@@ -18,11 +18,11 @@
   </div>
   <div class="col s9">
     {% if teacher_mode == True %}
-    <a href="#" class="btn-floating btn-large waves-effect waves-light red light"><i class="material-icons">add</i></a>
+    <a href="{% url 'new_module' course.id %}" class="btn-floating btn-large waves-effect waves-light red light right-align"><i class="material-icons">add</i></a>
     {% endif %}
     <div class="section">
-      <h4>Recent announcements</h4>
-      <div class="divider"></div>      
+      <h4 class="">Recent announcements</h4>
+      <div class="divider"></div>
       {{ course.syllabus | safe}}
     </div>
   </div>

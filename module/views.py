@@ -25,7 +25,7 @@ def new_module(request, course_id):
                 course.save()
 
                 # return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
-                return redirect('modules', course_id=course_id)
+                return redirect('course_modules', course_id=course_id)
         else:
             form = NewModuleForm()
 

@@ -17,14 +17,25 @@
     </ul>
   </div>
   <div class="col s9">
+    {% if teacher_mode == True %}
+    <a href="{% url 'new_module' course.id %}" class="btn-floating btn-large waves-effect waves-light red light"><i class="material-icons">add</i></a>
+    {% endif %}
     <div class="section">
       <h4>Modules</h4>
       <div class="divider"></div>
       <ul class="collapsible">
         {% for module in course.modules.all %}
         <li>
-          <div class="collapsible-header"><i class="material-icons">sticky_note_2</i>First</div>
-          <div class="collapsible-body"><span>Details</span></div>
+          <div class="collapsible-header"><i class="material-icons">expand_more</i>{{ module.title }}</div>
+          <div class="collapsible-body">
+            {% if teacher_mode == True %}
+            <a href="#" class="btn-small"><i class="material-icons">add</i>add a new page</a>
+            <a href="#" class="btn-small"><i class="material-icons">add</i>add a new quiz</a>
+            <a href="#" class="btn-small"><i class="material-icons">add</i>add a new assignment</a>
+            {% else %}
+            <span>{{ module.hours }} hours</span>
+            {% endif %}
+          </div>
         </li>
         {% endfor %}
       </ul>
