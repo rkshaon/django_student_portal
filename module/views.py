@@ -20,7 +20,7 @@ def new_module(request, course_id):
                 title = form.cleaned_data.get('title')
                 hours = form.cleaned_data.get('hours')
 
-                m, created = Module.objects.get_or_create(title=title, hours=hours, user=user)
+                m = Module.objects.create(title=title, hours=hours, user=user)
                 course.modules.add(m)
                 course.save()
 
