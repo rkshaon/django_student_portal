@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'authy',
     'classroom',
     'module',
-    'ckeditor'
+    'ckeditor',
+    'page',
 ]
 
 MIDDLEWARE = [
