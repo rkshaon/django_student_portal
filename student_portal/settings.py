@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'authy',
     'classroom',
-    'module',
-    'ckeditor',
     'page',
+    'module',    
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

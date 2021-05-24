@@ -4,7 +4,9 @@ from ckeditor.fields import RichTextField
 
 from django.contrib.auth.models import User
 
-from classroom.models import user_directory_path
+def user_directory_path(instance, filename):
+    # This file will be uploaded to MEDIA/{user_id}/filename
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 class PostFileContent(models.Model):
     """docstring for PostFileContent."""
