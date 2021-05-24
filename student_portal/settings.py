@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     'authy',
     'classroom',
     'page',
-    'module',    
+    'module',
     'ckeditor',
+    'quiz',
 ]
 
 MIDDLEWARE = [
