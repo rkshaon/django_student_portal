@@ -9,6 +9,6 @@ class NewPageForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorWidget())
     files = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
 
-    class Meta):
+    class Meta:
         model = Page
         fields = ('title', 'content', 'files')

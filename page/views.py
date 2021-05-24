@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_requird
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
 from page.models import Page, PostFileContent
@@ -8,7 +8,7 @@ from module.models import Module
 
 from page.forms import NewPageForm
 
-@login_requird
+@login_required
 def new_page_module(request, course_id, module_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
@@ -45,7 +45,7 @@ def new_page_module(request, course_id, module_id):
     template = loader.get_template('page/newpage.html')
     return HttpResponse(template.render(context, request))
 
-def page_details(request, course_id, page_id):
+def page_details(request, course_id, module_id, page_id):
     page = get_object_or_404(Page, id=page_id)
 
     context = {
